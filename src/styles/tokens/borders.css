@@ -1,0 +1,20 @@
+/**
+ * Border tokens
+ */
+
+:root {
+  --border-width-hairline: 1px;
+  --border-width-default: 1px;
+  --border-width-strong: 2px;
+  --border-color-default: var(--gray-200);
+  --border-color-strong: var(--gray-300);
+  --border-color-subtle: oklch(0.928 0.004 264 / 0.72);
+  --border-color-focus: var(--gray-400);
+}
+
+.dark {
+  --border-color-default: oklch(1 0 0 / 10%);
+  --border-color-strong: oklch(1 0 0 / 16%);
+  --border-color-subtle: oklch(1 0 0 / 6%);
+  --border-color-focus: var(--gray-500);
+}
