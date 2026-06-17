@@ -1,0 +1,34 @@
+---
+description: Financial Organizer project standards for designer workflow and code
+alwaysApply: true
+---
+
+# Financial Organizer — Project Rules
+
+## Designer workflow
+
+I am a designer, not a developer. Always:
+
+- Explain what you're doing in plain English before doing it
+- Run all terminal commands yourself, never ask me to run them
+- Stop and wait for my confirmation between major steps
+- Never build more than what I asked for in one step
+- If you hit an error, fix it before moving on
+- Never push to GitHub without my explicit instruction
+
+## Code rules
+
+Always follow these without being asked:
+
+- Use shadcn/ui components explicitly (Card, Button, Input, Badge, Separator) — never build custom divs when a shadcn component exists
+- Use token-based spacing only: p-4, p-6, gap-4, gap-6 — never hardcode pixel values
+- Mobile padding: p-4 (16px). Desktop padding: p-6 (24px)
+- All cards use shadcn Card + CardContent with consistent internal padding
+- Financial amounts always use text-3xl font-bold minimum
+- Labels below amounts use text-sm text-muted-foreground
+- All new Financial/ components must have a Storybook story
+- Never add colors — grayscale only until brand confirmed
+- When building from prototype, match UX flow exactly but redesign visually using our token system
+- Never build more than one component per step without explicit approval
+- Storybook: every component gets a story, organized under Tokens/ UI/ Layout/ Financial/ Pages/Mobile/ Pages/Desktop/
+- Never create duplicate-looking stories — each story must be visually distinct
