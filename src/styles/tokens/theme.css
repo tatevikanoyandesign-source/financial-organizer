@@ -1,7 +1,5 @@
 /**
- * Tailwind theme bridge
- *
- * Exposes design tokens as Tailwind utilities.
+ * Tailwind theme bridge — exposes design tokens as Tailwind utilities.
  */
 
 @theme inline {
@@ -74,46 +72,54 @@
   --color-foreground: var(--foreground);
   --color-background: var(--background);
 
-  --spacing-token-1: var(--space-1);
-  --spacing-token-2: var(--space-2);
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
+  --spacing-3xl: var(--space-3xl);
+  --spacing-token-1: var(--space-xs);
+  --spacing-token-2: var(--space-sm);
   --spacing-token-3: var(--space-3);
-  --spacing-token-4: var(--space-4);
-  --spacing-token-5: var(--space-5);
-  --spacing-token-6: var(--space-6);
-  --spacing-token-8: var(--space-8);
-  --spacing-token-10: var(--space-10);
+  --spacing-token-4: var(--space-md);
+  --spacing-token-5: var(--space-lg);
+  --spacing-token-6: var(--space-xl);
+  --spacing-token-8: var(--space-2xl);
+  --spacing-token-10: var(--space-3xl);
   --spacing-token-12: var(--space-12);
   --spacing-token-16: var(--space-16);
 
+  --radius-none: var(--radius-none);
   --radius-xs: var(--radius-xs);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-  --radius-token-xl: var(--radius-xl);
-  --radius-token-2xl: var(--radius-2xl);
-  --radius-token-3xl: var(--radius-3xl);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-xl);
+  --radius-3xl: var(--radius-xl);
+  --radius-4xl: var(--radius-xl);
+  --radius-token-xl: var(--radius-lg);
+  --radius-token-2xl: var(--radius-xl);
+  --radius-token-3xl: var(--radius-xl);
   --radius-token-full: var(--radius-full);
 
+  --shadow-none: var(--shadow-none);
   --shadow-xs: var(--shadow-xs);
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
-  --shadow-xl: var(--shadow-xl);
   --shadow-inner: var(--shadow-inner);
 
-  --text-xs: var(--font-size-xs);
-  --text-sm: var(--font-size-sm);
-  --text-base: var(--font-size-base);
-  --text-lg: var(--font-size-lg);
-  --text-xl: var(--font-size-xl);
-  --text-2xl: var(--font-size-2xl);
-  --text-3xl: var(--font-size-3xl);
-  --text-4xl: var(--font-size-4xl);
-  --text-5xl: var(--font-size-5xl);
+  --text-xs: var(--type-caption-size);
+  --text-sm: var(--type-footnote-size);
+  --text-base: var(--type-body-size);
+  --text-lg: var(--type-callout-size);
+  --text-xl: var(--type-title-3-size);
+  --text-2xl: var(--type-title-2-size);
+  --text-3xl: var(--type-title-1-size);
+  --text-4xl: var(--type-large-title-size);
+  --text-5xl: var(--type-large-title-size);
 
   --ease-standard: var(--motion-ease-standard);
   --ease-decelerate: var(--motion-ease-decelerate);

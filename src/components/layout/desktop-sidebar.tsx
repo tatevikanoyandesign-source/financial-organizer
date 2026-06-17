@@ -53,7 +53,7 @@ export function DesktopSidebar({
               onClick={() => onNavigate?.(item.id)}
               aria-current={isActive ? 'page' : undefined}
               className={cn(
-                'flex items-center gap-token-3 rounded-token-xl px-token-3 py-token-3 text-left text-sm font-medium transition-colors duration-normal ease-standard',
+                'flex min-h-[var(--touch-target-min)] items-center gap-token-3 rounded-token-xl px-token-3 py-token-3 text-left text-[length:var(--type-body-size)] font-[number:var(--type-headline-weight)] transition-colors duration-normal ease-standard',
                 isActive
                   ? 'bg-brand-primary text-brand-primary-foreground shadow-sm'
                   : 'text-text-secondary hover:bg-surface-muted hover:text-foreground',

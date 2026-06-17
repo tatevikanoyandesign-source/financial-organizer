@@ -49,6 +49,20 @@ const preview: Preview = {
     },
   ],
   parameters: {
+    layout: 'fullscreen',
+    options: {
+      storySort: {
+        order: [
+          'Tokens',
+          ['Colors', 'Typography', 'Spacing', 'Radius', 'Shadows'],
+          'UI',
+          'Financial',
+          'Layout',
+          'Pages',
+          ['Mobile', 'Desktop'],
+        ],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

@@ -125,60 +125,95 @@ function createDocsOnlyStory(sections: DocSectionConfig[]) {
   }
 }
 
-import { TransactionList } from './transaction-list'
-import { transactions } from '@/lib/mock-data'
+function PageFrame({
+  children,
+  variant = 'mobile',
+}: {
+  children: ReactNode
+  variant?: 'mobile' | 'desktop'
+}) {
+  if (variant === 'mobile') {
+    return (
+      <div className="mx-auto w-full max-w-[390px] overflow-hidden rounded-xl border border-border bg-background">
+        <div className="p-4">{children}</div>
+      </div>
+    )
+  }
 
-const description = 'Grouped list of recent transactions with amounts and categories.'
-
-const sections: DocSectionConfig[] = [
-  {
-    title: 'Full list',
-    description: 'Default transaction feed for overview and accounts pages.',
-    width: 'wide',
-    code: `import { TransactionList } from '@/components/financial/transaction-list'
-import { transactions } from '@/lib/mock-data'
-
-export function FullListExample() {
-  return <TransactionList transactions={transactions} />
-}`,
-    render: () => <TransactionList transactions={[...transactions]} />,
-  },
-  {
-    title: 'Compact',
-    description: 'Short list for mobile or sidebar contexts.',
-    width: 'wide',
-    code: `import { TransactionList } from '@/components/financial/transaction-list'
-import { transactions } from '@/lib/mock-data'
-
-export function CompactExample() {
   return (
-    <TransactionList
-      transactions={transactions.slice(0, 3)}
-      description="Short list for mobile or sidebar contexts"
-    />
+    <div className="w-full min-w-0 overflow-hidden rounded-xl border border-border bg-background p-6">
+      {children}
+    </div>
   )
-}`,
-    render: () => (
-      <TransactionList
-        transactions={transactions.slice(0, 3)}
-        description="Short list for mobile or sidebar contexts"
-      />
-    ),
-  },
-]
+}
 
-const meta = {
-  title: 'Financial/TransactionList',
-  component: TransactionList,
-  tags: ['autodocs'],
-  parameters: {
-    layout: 'fullscreen',
+function DarkPreview({ children }: { children: ReactNode }) {
+  return <div className="dark rounded-lg bg-background text-foreground">{children}</div>
+}
+
+function buildPageSections(
+  PageComponent: ComponentType,
+  variant: 'mobile' | 'desktop',
+  importPath: string,
+): DocSectionConfig[] {
+  const previewWidth = variant === 'mobile' ? ('mobile' as const) : ('full' as const)
+
+  return [
+    {
+      title: 'Light',
+      description: 'Default light theme.',
+      width: previewWidth,
+      code: `import { Page } from '${importPath}'
+
+export function LightExample() {
+  return <Page />
+}`,
+      render: () => (
+        <PageFrame variant={variant}>
+          <PageComponent />
+        </PageFrame>
+      ),
+    },
+    {
+      title: 'Dark',
+      description: 'Dark theme variant.',
+      width: previewWidth,
+      code: `// Wrap in className="dark" for dark theme preview.`,
+      render: () => (
+        <DarkPreview>
+          <PageFrame variant={variant}>
+            <PageComponent />
+          </PageFrame>
+        </DarkPreview>
+      ),
+    },
+  ]
+}
+
+function buildPageDocs<C extends ComponentType>(
+  PageComponent: C,
+  _description: string,
+  sections: DocSectionConfig[],
+) {
+  return {
+    layout: 'fullscreen' as const,
     docs: {
       description: { component: description },
-      page: createComponentDocPage(TransactionList, description, sections),
+      page: createComponentDocPage(PageComponent, description, sections),
     },
-  },
-} satisfies Meta<typeof TransactionList>
+  }
+}
+
+import { TransactionsPage } from './transactions-page'
+
+const description = 'Full transaction history with filters and grouping.'
+const sections = buildPageSections(TransactionsPage, 'desktop', '@/pages/transactions-page')
+
+const meta = {
+  title: 'Pages/Desktop/Transactions',
+  component: TransactionsPage,
+  parameters: buildPageDocs(TransactionsPage, description, sections),
+} satisfies Meta<typeof TransactionsPage>
 
 export default meta
 

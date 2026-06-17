@@ -5,7 +5,7 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-[length:var(--type-body-size)] font-[number:var(--type-headline-weight)] tracking-[var(--type-body-tracking)] whitespace-nowrap shadow-none transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -22,16 +22,17 @@ const buttonVariants = cva(
       },
       size: {
         default:
-          "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        icon: "size-8",
+          "min-h-[var(--touch-target-min)] h-[var(--touch-target-min)] gap-2 px-[var(--space-md)] has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
+        xs: "min-h-[var(--touch-target-min)] h-[var(--touch-target-min)] gap-1 rounded-[var(--radius-sm)] px-[var(--space-sm)] text-[length:var(--type-footnote-size)] md:min-h-7 md:h-7 in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-3",
+        sm: "min-h-[var(--touch-target-min)] h-[var(--touch-target-min)] gap-1.5 rounded-[var(--radius-md)] px-[var(--space-sm)] text-[length:var(--type-subhead-size)] md:min-h-9 md:h-9 in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "min-h-[var(--touch-target-min)] h-[var(--touch-target-min)] gap-2 px-[var(--space-lg)] has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4",
+        icon: "size-[var(--touch-target-min)] min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] md:size-10 md:min-h-10 md:min-w-10",
         "icon-xs":
-          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+          "size-[var(--touch-target-min)] min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] rounded-[var(--radius-sm)] md:size-7 md:min-h-7 md:min-w-7 in-data-[slot=button-group]:rounded-md [&_svg:not([class*='size-'])]:size-3",
         "icon-sm":
-          "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
-        "icon-lg": "size-9",
+          "size-[var(--touch-target-min)] min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] rounded-[var(--radius-md)] md:size-9 md:min-h-9 md:min-w-9 in-data-[slot=button-group]:rounded-md",
+        "icon-lg":
+          "size-[var(--touch-target-min)] min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] md:size-11 md:min-h-11 md:min-w-11",
       },
     },
     defaultVariants: {

@@ -1,73 +1,225 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta } from '@storybook/react-vite'
+
+import type { ComponentType, ReactNode } from 'react'
+import { ArgTypes, Description, Source, Title } from '@storybook/addon-docs/blocks'
+
+import { cn } from '@/lib/utils'
+
+type PreviewWidth = 'card' | 'form' | 'wide' | 'full' | 'layout' | 'mobile'
+
+type DocSectionConfig = {
+  title: string
+  description: string
+  code: string
+  render: () => ReactNode
+  width?: PreviewWidth
+}
+
+const previewWidthClasses: Record<PreviewWidth, string> = {
+  card: 'mx-auto w-full max-w-[420px] min-w-[280px]',
+  form: 'mx-auto w-full max-w-[420px] min-w-[280px]',
+  wide: 'mx-auto w-full max-w-2xl min-w-[320px]',
+  full: 'w-full min-w-0',
+  layout: 'w-full min-w-0',
+  mobile: 'mx-auto w-full max-w-[390px] min-w-[320px]',
+}
+
+function DocPage({ children }: { children: ReactNode }) {
+  return (
+    <div className="mx-auto flex w-full max-w-[960px] flex-col gap-10 px-6 py-8">
+      {children}
+    </div>
+  )
+}
+
+function DocSection({
+  title,
+  description,
+  children,
+}: {
+  title: string
+  description: string
+  children: ReactNode
+}) {
+  return (
+    <section className="flex flex-col gap-4">
+      <div className="space-y-2">
+        <h3 className="text-base font-semibold tracking-tight text-foreground">{title}</h3>
+        <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+      </div>
+      {children}
+    </section>
+  )
+}
+
+function DocPreview({
+  children,
+  width = 'card',
+}: {
+  children: ReactNode
+  width?: PreviewWidth
+}) {
+  return (
+    <div className="rounded-lg border border-border bg-background p-6">
+      <div className={cn('w-full', previewWidthClasses[width])}>{children}</div>
+    </div>
+  )
+}
+
+function DocApiHeading() {
+  return (
+    <h2 className="doc-api mb-4 mt-12 border-t border-border pt-10 text-xl font-semibold tracking-tight text-foreground">
+      Api
+    </h2>
+  )
+}
+
+function renderDocOverview(sections: DocSectionConfig[]) {
+  return (
+    <DocPage>
+      {sections.map((section) => (
+        <DocSection
+          key={section.title}
+          title={section.title}
+          description={section.description}
+        >
+          <DocPreview width={section.width}>{section.render()}</DocPreview>
+        </DocSection>
+      ))}
+    </DocPage>
+  )
+}
+
+function createComponentDocPage(
+  component: ComponentType<any>,
+  _description: string,
+  sections: DocSectionConfig[],
+) {
+  return function ComponentDocPage() {
+    return (
+      <>
+        <Title />
+        <Description />
+        <DocPage>
+          {sections.map((section) => (
+            <DocSection
+              key={section.title}
+              title={section.title}
+              description={section.description}
+            >
+              <DocPreview width={section.width}>{section.render()}</DocPreview>
+              <Source code={section.code} language="tsx" dark />
+            </DocSection>
+          ))}
+        </DocPage>
+        <DocApiHeading />
+        <ArgTypes of={component} />
+      </>
+    )
+  }
+}
+
+function createDocsOnlyStory(sections: DocSectionConfig[]) {
+  return {
+    render: () => renderDocOverview(sections),
+  }
+}
 
 import { Button } from './button'
+
+const description = 'Use buttons for actions, navigation, and form submission.'
+
+const sections: DocSectionConfig[] = [
+  {
+    title: 'Variants',
+    description: 'Visual styles for different emphasis levels.',
+    width: 'form',
+    code: `import { Button } from '@/components/ui/button'
+
+export function VariantsExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button>Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="destructive">Destructive</Button>
+      <Button variant="link">Link</Button>
+    </div>
+  )
+}`,
+    render: () => (
+      <div className="flex flex-wrap gap-3">
+        <Button>Default</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="destructive">Destructive</Button>
+        <Button variant="link">Link</Button>
+      </div>
+    ),
+  },
+  {
+    title: 'Sizes',
+    description: 'Scale buttons to match context and density.',
+    width: 'form',
+    code: `import { Button } from '@/components/ui/button'
+
+export function SizesExample() {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <Button size="lg">Large</Button>
+      <Button>Default</Button>
+      <Button size="sm">Small</Button>
+    </div>
+  )
+}`,
+    render: () => (
+      <div className="flex flex-wrap items-center gap-3">
+        <Button size="lg">Large</Button>
+        <Button>Default</Button>
+        <Button size="sm">Small</Button>
+      </div>
+    ),
+  },
+  {
+    title: 'Disabled',
+    description: 'Inactive buttons for unavailable actions.',
+    width: 'form',
+    code: `import { Button } from '@/components/ui/button'
+
+export function DisabledExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button disabled>Default</Button>
+      <Button variant="outline" disabled>Outline</Button>
+    </div>
+  )
+}`,
+    render: () => (
+      <div className="flex flex-wrap gap-3">
+        <Button disabled>Default</Button>
+        <Button variant="outline" disabled>
+          Outline
+        </Button>
+      </div>
+    ),
+  },
+]
 
 const meta = {
   title: 'UI/Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered',
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: [
-        'default',
-        'outline',
-        'secondary',
-        'ghost',
-        'destructive',
-        'link',
-      ],
-    },
-    size: {
-      control: 'select',
-      options: ['default', 'xs', 'sm', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'],
+    layout: 'fullscreen',
+    docs: {
+      description: { component: description },
+      page: createComponentDocPage(Button, description, sections),
     },
   },
 } satisfies Meta<typeof Button>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    children: 'Button',
-  },
-}
-
-export const Outline: Story = {
-  args: {
-    variant: 'outline',
-    children: 'Outline',
-  },
-}
-
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-    children: 'Secondary',
-  },
-}
-
-export const Destructive: Story = {
-  args: {
-    variant: 'destructive',
-    children: 'Destructive',
-  },
-}
-
-export const Ghost: Story = {
-  args: {
-    variant: 'ghost',
-    children: 'Ghost',
-  },
-}
-
-export const Link: Story = {
-  args: {
-    variant: 'link',
-    children: 'Link',
-  },
-}
+export const Docs = createDocsOnlyStory(sections)

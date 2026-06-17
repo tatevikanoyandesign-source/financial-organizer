@@ -42,7 +42,7 @@ export function MobileNav({
               onClick={() => onNavigate?.(item.id)}
               aria-current={isActive ? 'page' : undefined}
               className={cn(
-                'flex min-h-14 flex-col items-center justify-center gap-token-1 rounded-token-xl px-token-1 py-token-2 text-[0.6875rem] font-medium transition-colors duration-normal ease-standard',
+                'flex min-h-[var(--touch-target-min)] flex-col items-center justify-center gap-token-1 rounded-token-xl px-token-1 py-token-2 text-[length:var(--type-caption-size)] font-[number:var(--type-headline-weight)] transition-colors duration-normal ease-standard',
                 isActive
                   ? 'bg-surface-muted text-foreground'
                   : 'text-muted-foreground',

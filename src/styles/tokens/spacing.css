@@ -1,20 +1,36 @@
 /**
- * Spacing tokens
- *
- * 4px base grid for consistent layout rhythm.
+ * Spacing tokens — Apple 8pt grid (web/PWA).
  */
 
 :root {
+  /* Apple 8pt grid */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
+  --space-3xl: 3rem;
+
+  /* Page margins */
+  --page-margin-mobile: 1rem;
+  --page-margin-tablet: 1.25rem;
+  --page-margin-desktop: 2rem;
+
+  /* Mobile web touch target minimum (HIG reference) */
+  --touch-target-min: 2.75rem;
+
+  /* Legacy aliases for token-* utilities */
   --space-0: 0;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
+  --space-1: var(--space-xs);
+  --space-2: var(--space-sm);
   --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
+  --space-4: var(--space-md);
+  --space-5: var(--space-lg);
+  --space-6: var(--space-xl);
   --space-7: 1.75rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
+  --space-8: var(--space-2xl);
+  --space-10: var(--space-3xl);
   --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;

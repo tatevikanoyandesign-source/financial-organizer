@@ -1,7 +1,6 @@
 import type { Meta } from '@storybook/react-vite'
 
-import type { ComponentType, ReactNode } from 'react'
-import { ArgTypes, Description, Source, Title } from '@storybook/addon-docs/blocks'
+import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -66,14 +65,6 @@ function DocPreview({
   )
 }
 
-function DocApiHeading() {
-  return (
-    <h2 className="doc-api mb-4 mt-12 border-t border-border pt-10 text-xl font-semibold tracking-tight text-foreground">
-      Api
-    </h2>
-  )
-}
-
 function renderDocOverview(sections: DocSectionConfig[]) {
   return (
     <DocPage>
@@ -90,79 +81,34 @@ function renderDocOverview(sections: DocSectionConfig[]) {
   )
 }
 
-function createComponentDocPage(
-  component: ComponentType<any>,
-  _description: string,
-  sections: DocSectionConfig[],
-) {
-  return function ComponentDocPage() {
-    return (
-      <>
-        <Title />
-        <Description />
-        <DocPage>
-          {sections.map((section) => (
-            <DocSection
-              key={section.title}
-              title={section.title}
-              description={section.description}
-            >
-              <DocPreview width={section.width}>{section.render()}</DocPreview>
-              <Source code={section.code} language="tsx" dark />
-            </DocSection>
-          ))}
-        </DocPage>
-        <DocApiHeading />
-        <ArgTypes of={component} />
-      </>
-    )
-  }
-}
-
 function createDocsOnlyStory(sections: DocSectionConfig[]) {
   return {
     render: () => renderDocOverview(sections),
   }
 }
 
-import { AccountCard } from './account-card'
-import { accounts } from '@/lib/mock-data'
+import { TypographyTokenPreview } from './token-sections'
 
-const description = 'Display linked account balances with institution and type metadata.'
-
-const sections: DocSectionConfig[] = accounts.map((account) => ({
-  title: account.type,
-  description: `${account.institution} account ending in ${account.mask}.`,
-  width: 'card' as const,
-  code: `import { AccountCard } from '@/components/financial/account-card'
-
-export function ${account.type.replace(/\s/g, '')}Example() {
-  return (
-    <AccountCard
-      name="${account.name}"
-      institution="${account.institution}"
-      balance={${account.balance}}
-      mask="${account.mask}"
-      type="${account.type}"
-    />
-  )
-}`,
-  render: () => <AccountCard {...account} />,
-}))
+const description = 'Display and body styles tuned for premium financial UI.'
 
 const meta = {
-  title: 'Financial/AccountCard',
-  component: AccountCard,
-  tags: ['autodocs'],
+  title: 'Tokens/Typography',
   parameters: {
     layout: 'fullscreen',
     docs: {
       description: { component: description },
-      page: createComponentDocPage(AccountCard, description, sections),
     },
   },
-} satisfies Meta<typeof AccountCard>
+} satisfies Meta
 
 export default meta
 
-export const Docs = createDocsOnlyStory(sections)
+export const Docs = createDocsOnlyStory([
+  {
+    title: 'Typography',
+    description,
+    code: '',
+    width: 'full',
+    render: () => <TypographyTokenPreview />,
+  },
+])

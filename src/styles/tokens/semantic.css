@@ -1,7 +1,5 @@
 /**
- * Semantic tokens
- *
- * Maps design tokens to shadcn/ui variables so components keep working.
+ * Semantic tokens — maps design tokens to shadcn/ui variables.
  */
 
 :root {
@@ -11,15 +9,15 @@
   --card-foreground: var(--text-primary);
   --popover: var(--surface-elevated);
   --popover-foreground: var(--text-primary);
-  --primary: var(--brand-primary);
-  --primary-foreground: var(--brand-primary-foreground);
+  --primary: var(--gray-900);
+  --primary-foreground: var(--gray-50);
   --secondary: var(--surface-muted);
   --secondary-foreground: var(--text-primary);
   --muted: var(--surface-muted);
   --muted-foreground: var(--text-secondary);
   --accent: var(--surface-subtle);
   --accent-foreground: var(--text-primary);
-  --destructive: var(--brand-danger);
+  --destructive: var(--gray-700);
   --border: var(--border-color-default);
   --input: var(--border-color-default);
   --ring: var(--border-color-focus);
@@ -28,11 +26,11 @@
   --chart-3: var(--gray-700);
   --chart-4: var(--gray-800);
   --chart-5: var(--gray-900);
-  --radius: var(--radius-lg);
+  --radius: var(--radius-md);
   --sidebar: var(--surface-elevated);
   --sidebar-foreground: var(--text-primary);
-  --sidebar-primary: var(--brand-primary);
-  --sidebar-primary-foreground: var(--brand-primary-foreground);
+  --sidebar-primary: var(--gray-900);
+  --sidebar-primary-foreground: var(--gray-50);
   --sidebar-accent: var(--surface-muted);
   --sidebar-accent-foreground: var(--text-primary);
   --sidebar-border: var(--border-color-default);
@@ -40,5 +38,9 @@
 }
 
 .dark {
-  --destructive: oklch(0.704 0.191 22.216);
+  --primary: var(--gray-100);
+  --primary-foreground: var(--gray-950);
+  --destructive: var(--gray-400);
+  --sidebar-primary: var(--gray-100);
+  --sidebar-primary-foreground: var(--gray-950);
 }
